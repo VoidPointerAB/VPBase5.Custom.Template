@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+    <PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<AssemblyName>VPBase.Custom.Tests</AssemblyName>
+		<RootNamespace>VPBase.Custom.Tests</RootNamespace>
+		<NoWarn>$(NoWarn);NU1507</NoWarn>
+    </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="NUnit" />
+		<PackageReference Include="NUnit.ConsoleRunner" />
+		<PackageReference Include="NUnit3TestAdapter" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\VPBase.Custom.Core\VPBase.Custom.Core.csproj" />
+		<ProjectReference Include="..\VPBase.Custom.Server\VPBase.Custom.Server.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="VoidPointer.TestHelpers">
+		  <HintPath>..\thirdparty\VoidPointer.TestHelpers\VoidPointer.TestHelpers.dll</HintPath>
+		</Reference>
+		<Reference Include="VPBase.Shared.Core">
+		  <HintPath>..\thirdparty\vpbase\VPBase.Shared.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="VPBase.Shared.Server">
+		  <HintPath>..\thirdparty\vpbase\VPBase.Shared.Server.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

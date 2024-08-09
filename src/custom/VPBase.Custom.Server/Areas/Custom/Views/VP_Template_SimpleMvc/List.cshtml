@@ -1,0 +1,87 @@
+﻿@using VPBase.Shared.Server.Configuration
+@using VPBase.Shared.Server.Helpers
+@using VPBase.Shared.Server.Models.ViewModels
+
+@inject AppSettings AppSettings
+@{
+    Layout = ViewAdminHelper.BaseLayoutPath;
+
+    var title = "Custom Simple VP Template Mvcs";
+
+    ViewBag.Title = AppSettings.MenuSettings.SystemName + " - " + title;
+}
+
+@await Html.PartialAsync(ViewAdminHelper.BasePageHeadingPath, new PageHeading(title))
+
+<style>
+    .js-filter-container {
+        display: inline-block;
+    }
+
+        .js-filter-container > div > * {
+            margin-right: 15px;
+        }
+
+            .js-filter-container > div > *:last-child {
+                margin-right: 0;
+            }
+
+    .filter-group {
+        display: inline-block
+    }
+
+        .filter-group > * {
+            display: inline-block;
+            width: inherit;
+        }
+
+    #load-button {
+        margin-bottom: 4px;
+    }
+</style>
+
+<div class="wrapper wrapper-content animated fadeIn">
+
+    <div class="ibox js-filter-container">
+
+        <div class="ibox-content">
+
+            <div class="filter-group">
+                <label class="control-label">Filter 1:</label>
+                <input class="form-control" value="" data-filter-name="filter1" />
+            </div>
+
+            <div class="filter-group">
+                <label class="control-label">Filter 2:</label>
+                <input class="form-control" value="" data-filter-name="filter2" />
+            </div>
+
+            <button id="load-button" class="btn btn-primary">Load</button>
+        </div>
+    </div>
+
+    <div class="ibox float-e-margins">
+
+        <div class="ibox-content" id="table-container">
+
+            <div class="table-responsive data-table-container">
+                <div class="data-table-controls" style="display: block;">
+                    <a href="@Url.Action("Add", "VP_Template_SimpleMvc")" class="btn btn-success"><i class="fa fa-plus"></i> New</a>
+                </div>
+
+                <table class="table table-striped table-bordered table-hover" width="100%"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/custom/js/VP_Template_SimpleMvc/VP_Template_SimpleMvcListManager.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            VP_Template_SimpleMvcListManager.Init();
+        });
+    </script>
+}

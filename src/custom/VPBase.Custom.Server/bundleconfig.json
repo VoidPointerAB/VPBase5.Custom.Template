@@ -1,0 +1,87 @@
+[
+  /* --- GENERAL BUNDLES ---
+    These bundles will always be included from the _Layout-file. Do not add new bundles in this
+    section, instead add to the already existing ones.
+  */
+  {
+    "outputFileName": "wwwroot/bundles/base/css/100_layout_admin_vendor_styles.css",
+    "inputFiles": [
+      "wwwroot/base/lib/bootstrap/css/bootstrap.min.css",
+      "wwwroot/base/fonts/font_awesome/css/font-awesome.css",
+      "wwwroot/base/css/vendor/inspinia/plugins/dataTables/datatables201126.min.css",
+      "wwwroot/base/css/vendor/inspinia/plugins/toastr/toastr.min.css",
+      "wwwroot/base/css/vendor/inspinia/plugins/sweetalert/sweetalert.css",
+      "wwwroot/base/css/vendor/inspinia/plugins/iCheck/custom.css",
+      "wwwroot/base/css/vendor/inspinia/plugins/bootstrap_datepicker/bootstrap-datepicker.min.css",
+      "wwwroot/base/css/vendor/inspinia/plugins/chosen/bootstrap-chosen.css",
+      "wwwroot/base/css/vendor/inspinia/plugins/clockpicker/clockpicker.css",
+      "wwwroot/base/css/vendor/inspinia/style.css",
+      "wwwroot/base/css/vendor/inspinia/animate.min.css",
+      "wwwroot/base/css/vendor/simplemde/simplemde.min.css"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/bundles/base/css/200_layout_admin_voidpointer_styles.css",
+    "inputFiles": [
+      "wwwroot/base/css/inspiniaOverrides.css"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/bundles/base/js/100_layout_admin_vendor_scripts.js",
+    "inputFiles": [
+      "wwwroot/base/lib/jquery/jquery-2.1.1.min.js",
+      "wwwroot/base/lib/bootstrap/js/bootstrap.min.js",
+      "wwwroot/base/js/vendor/inspinia/inspinia.js",
+      "wwwroot/base/js/vendor/inspinia/skin.config.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/pace/pace.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/slimscroll/jquery.slimscroll.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/dataTables/datatables201126.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/toastr/toastr.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/sweetalert/sweetalert.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/iCheck/icheck.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/bootstrap_datepicker/bootstrap-datepicker.min.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/chosen/chosen.jquery.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/clockpicker/clockpicker.js",
+      "wwwroot/base/js/vendor/inspinia/plugins/metisMenu/metisMenu.min.js",
+      "wwwroot/base/js/vendor/lodash.js",
+      "wwwroot/base/js/vendor/simplemde/simplemde.min.js"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/bundles/base/js/200_layout_admin_voidpointer_scripts.js",
+    "inputFiles": [
+      "wwwroot/base/js/helpers/RefreshLoginManager.js",
+      "wwwroot/base/js/helpers/GlobalManager.js",
+      "wwwroot/base/js/helpers/AjaxManager.js",
+      "wwwroot/base/js/helpers/CookieHelper.js",
+      "wwwroot/base/js/helpers/DisplayContentHelper.js",
+      "wwwroot/base/js/helpers/AlertHelper.js",
+      "wwwroot/base/js/helpers/AdminInputHelper.js",
+      "wwwroot/base/js/helpers/DataTables/DataTableOptions.js",
+      "wwwroot/base/js/helpers/DataTables/BasicDataTable.js",
+      "wwwroot/base/js/helpers/DataTables/DataTableHelper.js",
+      "wwwroot/base/js/helpers/FilterHelper.js",
+      "wwwroot/base/js/helpers/HelpFunctionalityBehaviour.js",
+      "wwwroot/base/js/helpers/LocalizationHelper.js",
+      "wwwroot/base/js/helpers/StringFormat.js",
+      "wwwroot/base/js/CustomFields/MvcCustomFieldManager.js",
+      "wwwroot/base/js/CustomFields/CustomFieldManager.js",
+      "wwwroot/base/js/RightSidebar/RightSidebarManager.js",
+      "wwwroot/base/js/SideMenu/SideMenuManager.js",
+      "wwwroot/base/js/helpers/Markdown/MarkdownEditorFactory.js"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/bundles/base/js/220_customfield_scripts.js",
+    "inputFiles": [
+      "wwwroot/base/js/CustomFields/CustomFieldAddManager.js",
+      "wwwroot/base/js/CustomFields/CustomFieldCreator.js",
+      "wwwroot/base/js/CustomFields/CustomFieldListManager.js"
+    ]
+  }
+  
+]

@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VPBase.Base.Server</name>
+    </assembly>
+    <members>
+        <member name="T:VPBase.Base.Server.Areas.Admin.Controllers.AccountController">
+            <summary>
+            Open Id Connect (oidc) Controller for Account
+            </summary>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.AccountLocalController.ExternalLogin(System.String,System.String)">
+            <summary>
+            2023-07-15 - External Providers support in base code.
+            Initiate roundtrip from selected external authentication provider
+            </summary>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.AccountLocalController.ExternalLoginCallback">
+            <summary>
+            2023-07-15 - External Providers support in base code.
+            Handle roundtrip from selected external authentication provider
+            </summary>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.Index">
+            <summary>
+            File archieve upload view
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.DropZone">
+            <summary>
+            Dropzone upload view. Stores files to archieve
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.DropZoneTest">
+            <summary>
+            Sample example with custom implementation of the dropzone behaviour
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.DeleteFilesByRequestId(System.String)">
+            <summary>
+            Delete files by request id. Keep this synchronous to bether avoid EF-problems with disposed entity objects.
+            </summary>
+            <param name="requestId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.DeleteFilesByEntityId(System.String,System.String)">
+            <summary>
+            Delete files by entity id. Keep this synchronous to bether avoid EF-problems with disposed entity objects.
+            </summary>
+            <param name="entityId"></param>
+            <param name="fileTransformationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.DeleteFilesByFileItems(System.String)">
+            <summary>
+            Delete files by file item ids
+            </summary>
+            <param name="fileItems">A list of file item ids to be deleted</param>
+            <returns>Json data result true or false</returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.DeleteFileAsync(System.String)">
+            <summary>
+            General filehandler to deletes the file content using the file path
+            </summary>
+            <param name="filePath">File path to the file to delete</param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.DeleteArchieveFilesByIds(System.String)">
+            <summary>
+            Delete files by file item ids
+            </summary>
+            <param name="fileArchieveIds">A list of file archive ids to be deleted</param>
+            <returns>Json data result true or false</returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.Controllers.FileStorageController.GetFileAsync(System.String)">
+            <summary>
+            General filehandler to get file content using the file path. 
+            Do not change name of method or route.
+            Example: https://localhost:44394/Admin/FileStorage/GetFileAsync?filePath=%2Fpublic%2Fexample%2FSKISS_Plan11-27juni_original.png
+            </summary>
+            <param name="filePath">File path to the file to get</param>
+            <returns></returns>
+        </member>
+        <member name="T:VPBase.Base.Server.Areas.Admin.Interfaces.IFileStorageFetchWebAppService">
+            <summary>
+            *** Fetches file storage data. Do manipulation in IFileStorageWebAppService ***
+            </summary>
+        </member>
+        <member name="T:VPBase.Base.Server.Areas.Admin.Interfaces.IFileStorageWebAppService">
+            <summary>
+            *** Manipulates file storage. Place get methods in IFileStorageViewWebAppService ***
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Areas.Admin.Models.ViewModels.Editors.WysiwygEditorViewModel.RenderJsAndCss">
+            <summary>
+            Render javascript and css for the wysiwyg editor
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Areas.Admin.Models.ViewModels.Editors.WysiwygEditorViewModel.HtmlContent">
+            <summary>
+            Set html content to the editor
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Areas.Admin.Models.ViewModels.Editors.WysiwygEditorViewModel.HtmlContentResultElementName">
+            <summary>
+            Instruct the editor to set the content of wysiwyg html result to the value of an element with the 
+            specified name
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Areas.Admin.Models.ViewModels.Editors.WysiwygEditorViewModel.Height">
+            <summary>
+            Height of the editor
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Areas.Admin.Models.ViewModels.Email.EmailModeViewModel.CredentialsUsername">
+            <summary>
+            SMTP: UserName, AWSSES: AccessKeyId
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Areas.Admin.Models.ViewModels.Email.EmailModeViewModel.CredentialsPassword">
+            <summary>
+            SMTP: Password, AWSSES: SecretAccessKey
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Areas.Admin.Models.ViewModels.FileStorage.FileStorageBaseViewModel.EntityFilesCleanupBeforeAdd">
+            <summary>
+            Set this property to true if entity connected files should be erased before adding new ones
+            </summary>
+        </member>
+        <member name="T:VPBase.Base.Server.Areas.Admin.WebAppServices.AuthExternalProvidersWebAppService">
+            <summary>
+            2023-07-15 - External Providers support in base code.
+            Hide external authentication provider code
+            </summary>
+        </member>
+        <member name="T:VPBase.Base.Server.Areas.Admin.WebAppServices.FileStorageFetchWebAppService">
+            <summary>
+            *** Fetches file storage data. Do manipulation in FileStorageWebAppService ***
+            </summary>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.WebAppServices.FileStorageFetchWebAppService.GetFilesByEntityId(System.String,System.String,System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Flatten file items to a general list of file view models with underlaying meta items
+            </summary>
+            <param name="serverAddress">Server address</param>        /// <param name="tenantId">Tenant identification</param>
+            <param name="entityId">Entity identification</param>
+            <param name="fileTransformationId">Filetransformation identification</param>
+            <param name="getMetaItemsNearestToImageWidth">Optional param to specify with of nearest meta item image by width to be selected.
+            If not defined all meta items will be added. This is good to use in previews since we normally do not want to show all meta items with different sizes
+            in the list</param>
+            <returns>List of file storage view models</returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.WebAppServices.FileStorageFetchWebAppService.GetFileHandlerGetPath(System.String,System.String)">
+            <summary>
+            Gets the file handler action-path from to the general Get-file-handler
+            </summary>
+            <param name="serverAddress">Server address</param>
+            <param name="filePath">File path to the file to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.WebAppServices.FileStorageFetchWebAppService.GetFileHandlerDeletePath(System.String,System.String)">
+            <summary>
+            Gets the file handler action-path to the general Delete-file-handler
+            </summary>
+            <param name="serverAddress">Server address</param>
+            <param name="filePath">File path to the file to delete</param>
+            <returns></returns>
+        </member>
+        <member name="T:VPBase.Base.Server.Areas.Admin.WebAppServices.FileStorageWebAppService">
+            <summary>
+            *** Manipulates file storage. Place get methods in FileStorageViewWebAppService ***
+            </summary>
+        </member>
+        <member name="M:VPBase.Base.Server.Areas.Admin.WebAppServices.FileStorageWebAppService.SaveFilesAsync(System.IO.Stream,System.String,System.String)">
+            <summary>
+            Save files async using multipart form data. Mostly all info comes in the stream.
+            </summary>
+            <param name="fileStream"></param>
+            <param name="contentType"></param>
+            <param name="tenantId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:VPBase.Base.Server.BaseStartup">
+            <summary>
+            Has chosen to move the code from Startup.cs to this new class as this could be called from another assembly to
+            start the application and the preconditions are not exactly the same.
+            </summary>
+        </member>
+        <member name="M:VPBase.Base.Server.Code.Logging.RestAppender.WaitUntilQueueIsReached(System.Int32)">
+            <summary>
+            Waits until processing queue has reached the expected queue count.
+            </summary>
+            <param name="expectedQueueCount">Expected Queue Count.</param>
+        </member>
+        <member name="M:VPBase.Base.Server.Code.Settings.ContextSettingUpdateService.InjectUserEntityValues(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})">
+            <summary>
+            Called when user logins
+            </summary>
+            <param name="userClaims">List of user claims</param>
+        </member>
+        <member name="M:VPBase.Base.Server.Code.Settings.ContextSettingUpdateService.InjectTenantEntityValues(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Called when starting up the application for all active tenants
+            </summary>
+            <param name="tenantIds">List of tenant ids</param>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleApiController.Echo">
+            <summary>
+            Returs an echo from this nice base api
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleApiController.GetBaseSampleItems">
+            <summary>
+            Gets a list of base sample items
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleApiController.GetBaseSampleItem(System.Int64)">
+            <summary>
+            Gets a base sample item identified by "id"
+            </summary>
+            <param name="id">Unique id of the base sample item</param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleApiController.PostBaseSampleItem(VPBase.Base.Server.Models.ApiExample.BaseSampleItem)">
+            <summary>
+            Creates a base sample item
+            </summary>
+            <param name="baseSampleItem">Base sample item to be created</param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleApiController.PutBaseSampleItem(System.Int64,VPBase.Base.Server.Models.ApiExample.BaseSampleItem)">
+            <summary>
+            Updates a base sample item identified by "id"
+            </summary>
+            <param name="id">Unique id of the base sample item</param>
+            <param name="baseSampleItem">Name of the base sample item</param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleApiController.DeleteBaseSampleItem(System.Int64)">
+            <summary>
+            Deletes a base sample item identified by "id"
+            </summary>
+            <param name="id">Unique id of the base sample item</param>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleAuthApiController.OnlyOneClaimTypeTenantId">
+            <summary>
+            Using 'ClaimRequirementAttribute' to ensure that the user/client is authenticated and has only ONE claim of type: 'tid'
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleAuthApiController.BasicAuth">
+            <summary>
+            Using 'BasicAuthRequirementAttribute' to ensure that the user/client is authenticated with basic auth
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VPBase.Base.Server.Controllers.BaseSampleAuthApiController.SimplestBasicAuth">
+            <summary>
+            Using 'SimpleBasicAuthRequirementAttribute' to ensure that the user/client is authenticated with basic auth with the specified username and password
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv._404_Error">
+            <summary>
+              Looks up a localized string similar to 404 fel.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Choose_Tenant">
+            <summary>
+              Looks up a localized string similar to Välj företag.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Error">
+            <summary>
+              Looks up a localized string similar to Fel.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Language">
+            <summary>
+              Looks up a localized string similar to Språk.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Login">
+            <summary>
+              Looks up a localized string similar to Logga in.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Login_Local">
+            <summary>
+              Looks up a localized string similar to Logga in lokalt.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Logout">
+            <summary>
+              Looks up a localized string similar to Logga ut.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Logout_Local">
+            <summary>
+              Looks up a localized string similar to Logga ut lokalt.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Profile">
+            <summary>
+              Looks up a localized string similar to Profil.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Request_culture_provider">
+            <summary>
+              Looks up a localized string similar to Val av språkleverantör.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.Sorry__there_was_an_error">
+            <summary>
+              Looks up a localized string similar to Ursäkta, men det blev ett fel.
+            </summary>
+        </member>
+        <member name="P:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv.The_requested_resource_could_not_be_found_">
+            <summary>
+              Looks up a localized string similar to Den begärda resursen kunde inte hittas..
+            </summary>
+        </member>
+        <member name="M:VPBase.Base.Server.StartupConfigures.Applications.DefaultSettingStartupConfigureApplication.InjectDefaultSettingToStaticMemory(VPBase.Shared.Server.Configuration.AppSettings,VPBase.Shared.Server.Services.ContextSettings.IContextSettingService)">
+            <summary>
+            This methods adds default appsettings directly to the cached context setting list in the memory. 
+            Since the appsettings can be changed all the time is of no use to store the values to the database first
+            </summary>
+            <param name="appSettings">AppSettings</param>
+            <param name="contextSettingService">Context Service</param>
+        </member>
+    </members>
+</doc>

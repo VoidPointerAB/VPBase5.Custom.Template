@@ -1,0 +1,74 @@
+﻿@using VPBase.Shared.Server.Configuration
+@using VPBase.Shared.Server.Helpers
+@using VPBase.Shared.Server.Models.ViewModels
+@model VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_Mvc.VP_Template_MvcShowViewModel
+@inject AppSettings AppSettings
+
+@{
+    Layout = ViewAdminHelper.BaseLayoutPath;
+    var title = "Show VP_Template_Mvc";
+    ViewBag.Title = AppSettings.MenuSettings.SystemName + " - " + title;
+}
+
+@await Html.PartialAsync(ViewAdminHelper.BasePageHeadingPath, new PageHeading(title))
+
+<div class="wrapper wrapper-content animated fadeIn">
+    <div id="page-content">
+        <div class="row">
+
+            <div class="col-sm-12 col-lg-8">
+                <div class="ibox">
+                    <div class="tabs-container">
+                        <ul id="page-tabs" class="nav nav-tabs" role="tablist">
+                            <li class="active"><a class="nav-link active" data-toggle="tab" href="#information">Information</a></li>
+                        </ul>
+                        <div class="tab-content" id="tab-content">
+                            <div role="tabpanel" id="information" class="tab-pane active">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <div>@Model.Title</div>
+                                            </div>
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(Model.Category))
+                                        {
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    <div>@Model.Category</div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.Description))
+                                        {
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <div>@Model.Description</div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="clearfix button-content">
+                            <a href="@Url.Action("Edit", new {id = @Model.VP_Template_MvcId})" class="btn btn-primary pull-right">Edit</a>
+                            <a href="@Url.Action("List")" class="btn btn-default pull-right">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            @await Html.PartialAsync(ViewAdminHelper.BaseCustomFieldShowManagerPath, Model)
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+}

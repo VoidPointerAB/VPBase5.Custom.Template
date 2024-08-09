@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	    <ImplicitUsings>enable</ImplicitUsings>
+	    <Nullable>disable</Nullable>
+	    <AssemblyName>VPBase.Custom.Core</AssemblyName>
+	    <RootNamespace>VPBase.Custom.Core</RootNamespace>
+	    <AssemblyVersion>2.0.15.0</AssemblyVersion>
+	    <FileVersion>2.0.15.0</FileVersion>
+	    <Version>2.0.15</Version>
+		<NoWarn>$(NoWarn);NU1507</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Data\DataImporters\Test\**" />
+		<Compile Remove="Helpers\**" />
+		<EmbeddedResource Remove="Data\DataImporters\Test\**" />
+		<EmbeddedResource Remove="Helpers\**" />
+		<None Remove="Data\DataImporters\Test\**" />
+		<None Remove="Helpers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+			<PrivateAssets></PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" />
+		<PackageReference Include="VPBase.ACC" />
+
+		<PackageReference Include="Microsoft.Extensions.Configuration" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+		<PackageReference Include="VPBase5.Base.Core" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="VPBase.Shared.Core">
+			<HintPath>..\thirdparty\vpbase\VPBase.Shared.Core.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

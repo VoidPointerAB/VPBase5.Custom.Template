@@ -1,0 +1,81 @@
+﻿@using VPBase.Shared.Server.Helpers
+@using VPBase.Shared.Server.Resources
+@model VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_Mvc.VP_Template_MvcAddOrEditViewModel
+
+@{
+    var resourceSharedManager = ViewLocalizationHelper.GetManager(typeof(SharedResources), ViewContext.HttpContext);
+}
+
+@Html.HiddenFor(x => x.VP_Template_MvcId, new { id = "VP_Template_MvcId" })
+
+<div class="col-sm-12 col-lg-8">
+    @Html.HiddenFor(x => x.ModifiedUtcDate)
+
+    @if (Model.Errors.Any())
+    {
+        <div class="ibox">
+            <div class="ibox-content">
+                @foreach (var error in Model.Errors)
+                {
+                    <div class="text-danger">@error</div>
+                }
+            </div>
+        </div>
+    }
+    <div class="ibox">
+        <div class="tabs-container">
+            <ul id="page-tabs" class="nav nav-tabs" role="tablist">
+                <li class="active"><a class="nav-link active" data-toggle="tab" href="#information">Information</a></li>
+            </ul>
+            <div class="tab-content" id="tab-content">
+                <div role="tabpanel" id="information" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    @Html.TextBoxFor(x => x.Title, new { id = "title-input", @class = "form-control" })
+                                    @{
+                                        Html.RenderPartial(ViewAdminHelper.FormRequiredSpinnerPath, "title-required");
+                                    }
+                                    @Html.ValidationMessageFor(x => x.Title)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    @Html.TextBoxFor(x => x.Category, new { id = "category-input", @class = "form-control" })
+                                    @{
+                                        Html.RenderPartial(ViewAdminHelper.FormRequiredSpinnerPath, "category-required");
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    @Html.TextBoxFor(x => x.Description, new { id = "description-input", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="clearfix button-content">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-download"></i>
+                    @resourceSharedManager.GetString("Save")
+                </button>
+
+                <a href="@Url.Action("List", "VP_Template_Mvc")" class="btn btn-default"> @resourceSharedManager.GetString("Back")</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-group {
+        height: 70px;
+    }
+</style>

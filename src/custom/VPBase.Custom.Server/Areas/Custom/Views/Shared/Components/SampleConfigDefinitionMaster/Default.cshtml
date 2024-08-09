@@ -1,0 +1,278 @@
+﻿@using VPBase.Shared.Server.Helpers
+@{
+    var appConfigDefintionMaster = Context.GetAppConfigDefinitionMaster();
+
+    var application = appConfigDefintionMaster.GetApplication();
+
+    var allRoles = appConfigDefintionMaster.GetAllRoles();
+    var allRolesFromFiles = appConfigDefintionMaster.GetAllRolesFromFiles();
+
+    var allActivities = appConfigDefintionMaster.GetAllActivities();
+    var allActivitiesFromFiles = appConfigDefintionMaster.GetAllActivitiesFromFiles();
+
+    var appConfigDefinitions = appConfigDefintionMaster.GetAllApplicationConfigDefintions();
+}
+
+@if (application != null)
+{
+    <div class="col-sm-12 p-w-xs">
+        <div class="ibox">
+            <h3>Application Config Definition (Merged)</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <td><strong>Property</strong></td>
+                        <td><strong>Value</strong></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ApplicationId</td>
+                        <td>@application.ApplicationId</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>@application.Name</td>
+                    </tr>
+                    <tr>
+                        <td>PrefixName</td>
+                        <td>@application.PrefixName</td>
+                    </tr>
+                    <tr>
+                        <td>Scope</td>
+                        <td>@application.Scope</td>
+                    </tr>
+                    <tr>
+                        <td>ScopeDescription</td>
+                        <td>@application.ScopeDescription</td>
+                    </tr>
+                    <tr>
+                        <td>Roles Count</td>
+                        <td>@application.Roles.Count(), (see below for specification)</td>
+                    </tr>
+                    <tr>
+                        <td>Activities Count</td>
+                        <td>@application.Activities.Count(), (see below for specification)</td>
+                    </tr>
+                    <tr>
+                        <td>Policies Count</td>
+                        <td>@application.Policies.Count()</td>
+                    </tr>
+                    <tr>
+                        <td>ApplicationClients Count</td>
+                        <td>@application.ApplicationClients.Count()</td>
+                    </tr>
+                    <tr>
+                        <td>CustomFieldEntityDefinitions Count</td>
+                        <td>@application.CustomFieldEntityDefinitions.Count()</td>
+                    </tr>
+                    <tr>
+                        <td>DefaultActivityRoles Count</td>
+                        <td>@application.DefaultActivityRoles.Count()</td>
+                    </tr>
+                    <tr>
+                        <td>ApplicationSyncApiClient ClientId</td>
+                        <td>@application.GetApplicationSyncApiClient().ClientId</td>
+                    </tr>
+                    <tr>
+                        <td>ApplicationMvcClient ClientId</td>
+                        <td>@application.GetApplicationMvcClient().ClientId</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@if (appConfigDefinitions.Any())
+{
+    <div class="col-sm-12 p-w-xs">
+        <div class="ibox">
+            <h3>Application Config Definitions, Count: @appConfigDefinitions.Count()</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th width="30%">ApplicationId</th>
+                        <th width="20%">Name</th>
+                        <th width="10%">PrefixName</th>
+                        <th width="10%">Scope</th>
+                        <th width="30%">ScopeDescription</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var appConfigDefinition in appConfigDefinitions)
+                    {
+                        <tr>
+                            <td>@appConfigDefinition.GetApplication().ApplicationId</td>
+                            <td>@appConfigDefinition.GetApplication().Name</td>
+                            <td>@appConfigDefinition.GetApplication().PrefixName</td>
+                            <td>@appConfigDefinition.GetApplication().Scope</td>
+                            <td>@appConfigDefinition.GetApplication().ScopeDescription</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@if (allRoles.Any())
+{
+    <div class="col-sm-6 p-w-xs">
+        <div class="ibox">
+            <h3>Roles (Merged), Count: @allRoles.Count()</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th width="70%">RoleId</th>
+                        <th width="30%">RoleName</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var role in allRoles)
+                    {
+                        <tr>
+                            <td>@role.RoleId</td>
+                            <td>@role.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@if (allRolesFromFiles.Any())
+{
+    <div class="col-sm-6 p-w-xs">
+        <div class="ibox">
+            <h3>All Roles From Files, Count: @allRolesFromFiles.Count()</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th width="70%">RoleId</th>
+                        <th width="30%">RoleName</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var role in allRolesFromFiles)
+                    {
+                        <tr>
+                            <td>@role.RoleId</td>
+                            <td>@role.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@if (allActivities.Any())
+{
+    <div class="col-sm-12 p-w-xs">
+        <div class="ibox">
+            <h3>Activities (Merged), Count: @allActivities.Count()</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th width="30%">ActivityId</th>
+                        <th width="20%">ActivityName</th>
+                        <th width="16%">ClaimType</th>
+                        <th width="4%">IsActive</th>
+                        <th width="26%">Description</th>
+                        <th width="4%">SortOrder</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var activity in allActivities)
+                    {
+                        <tr>
+                            <td>@activity.ActivityId</td>
+                            <td>@activity.Name</td>
+                            <td>@activity.ClaimValue</td>
+                            <td>@activity.Active</td>
+                            <td>@activity.Description</td>
+                            <td>@activity.SortOrder</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@if (allActivitiesFromFiles.Any())
+{
+    <div class="col-sm-12 p-w-xs">
+        <div class="ibox">
+            <h3>All Activities From Files, Count: @allActivitiesFromFiles.Count()</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th width="30%">ActivityId</th>
+                        <th width="20%">ActivityName</th>
+                        <th width="16%">ClaimType</th>
+                        <th width="4%">IsActive</th>
+                        <th width="26%">Description</th>
+                        <th width="4%">SortOrder</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var activity in allActivitiesFromFiles)
+                    {
+                        <tr>
+                            <td>@activity.ActivityId</td>
+                            <td>@activity.Name</td>
+                            <td>@activity.ClaimValue</td>
+                            <td>@activity.Active</td>
+                            <td>@activity.Description</td>
+                            <td>@activity.SortOrder</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@if (application.Policies.Any())
+{
+    <div class="col-sm-12 p-w-xs">
+        <div class="ibox">
+            <h3>Policies (Merged), Count: @application.Policies.Count()</h3>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th width="30%">Name</th>
+                        <th width="20%">RequiredClaim.ClaimType</th>
+                        <th width="16%">RequiredClaim.RequiredValues</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var policy in application.Policies)
+                    {
+                        var requiredValues = string.Empty;
+                        if (policy.RequiredClaim.RequiredValues != null)
+                        {
+                            foreach (var value in policy.RequiredClaim.RequiredValues)
+                            {
+                                if (!string.IsNullOrEmpty(requiredValues))
+                                {
+                                    requiredValues += ", ";
+                                }
+                                requiredValues += value;
+                            }
+                        }
+                        <tr>
+                            <td>@policy.Name</td>
+                            <td>@policy.RequiredClaim.ClaimType</td>
+                            <td>@requiredValues</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+

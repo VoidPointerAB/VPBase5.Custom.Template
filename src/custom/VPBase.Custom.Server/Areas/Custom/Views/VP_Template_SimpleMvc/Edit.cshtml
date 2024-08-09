@@ -1,0 +1,38 @@
+﻿@using VPBase.Shared.Server.Configuration
+@using VPBase.Shared.Server.Helpers
+@using VPBase.Shared.Server.Models.ViewModels
+@model VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_SimpleMvc.VP_Template_SimpleMvcAddOrEditViewModel
+@inject AppSettings AppSettings
+@{
+    Layout = ViewAdminHelper.BaseLayoutPath;
+    var title = "Edit VP_Template_SimpleMvc";
+    ViewBag.Title = AppSettings.MenuSettings.SystemName + " - " + title;
+}
+
+@await Html.PartialAsync(ViewAdminHelper.BasePageHeadingPath, new PageHeading(title))
+
+<div class="wrapper wrapper-content animated fadeIn">
+    <div id="load-content">
+        @await Html.PartialAsync("~/Areas/Admin/Views/Shared/_DefaultSpinner.cshtml")
+    </div>
+    <div id="page-content" style="display: none;">
+        <div class="row">
+            @using (@Html.BeginForm("SaveEdit", "VP_Template_SimpleMvc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @await Html.PartialAsync("_AddEdit", Model)
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/custom/js/VP_Template_SimpleMvc/VP_Template_SimpleMvcEditManager.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            VP_Template_SimpleMvcEditManager.Init();
+        });
+    </script>
+}
+

@@ -1,0 +1,52 @@
+﻿@model VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_SimpleMvc.VP_Template_SimpleMvcAddOrEditViewModel
+
+@Html.HiddenFor(x => x.VP_Template_SimpleMvcId)
+
+<div class="col-sm-12 col-lg-8">
+    @Html.HiddenFor(x => x.ModifiedUtcDate)
+
+    @if (Model.Errors.Any())
+    {
+        <div class="ibox">
+            <div class="ibox-content">
+                @foreach (var error in Model.Errors)
+                {
+                    <div class="text-danger">@error</div>
+                }
+            </div>
+        </div>
+    }
+    <div class="ibox">
+        <div class="tabs-container">
+            <ul id="page-tabs" class="nav nav-tabs" role="tablist">
+                <li class="active"><a class="nav-link active" data-toggle="tab" href="#information">Information</a></li>
+            </ul>
+            <div class="tab-content" id="tab-content">
+                <div role="tabpanel" id="information" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    @Html.TextBoxFor(x => x.Title)
+                                    @Html.ValidationMessageFor(x => x.Title)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="clearfix button-content">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-download"></i>
+                    Save
+                </button>
+
+                <a href="@Url.Action("List", "VP_Template_SimpleMvc")" class="btn btn-default">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+

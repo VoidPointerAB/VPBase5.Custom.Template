@@ -1,0 +1,46 @@
+﻿
+@model IEnumerable<VPBase.Auth.Client.Models.Maintenance.MaintenanceWindowListModel>
+
+    <script src="~/base/js/vendor/inspinia/plugins/moment/moment-with-locales.min.js"></script>
+
+    @if (Model != null)
+    {
+        <div class="col-sm-12 p-w-xs">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                    <h2>Latest maintenance windows</h2>
+
+                </div>
+                @foreach (var window in Model)
+                {
+                    <div class="ibox-content">
+                        <p>
+                            @Html.Raw(window.FullDescription)
+                        </p>
+                        <small><i>Started: <span class="moment-date">@window.StartDateUtc</span></i></small>
+                        <br />
+                        <small><i>Ended: <span class="moment-date">@window.EndDateUtc</span></i></small>
+                        <br />
+                        <br />
+                        <b>@string.Join(", ", window.AffectedApplicationNames)</b>
+                    </div>
+                }
+
+                @if (!Model.Any())
+                {
+                    <div class="ibox-content">
+                        <div>
+                            No windows to show
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    <script>
+        $('.moment-date').each(function () {
+            var date = $(this).html();
+            $(this).html(moment.utc(date).local().format("YYYY-MM-DD HH:mm"))
+        });
+    </script>

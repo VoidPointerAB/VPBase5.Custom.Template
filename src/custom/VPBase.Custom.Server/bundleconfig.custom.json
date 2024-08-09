@@ -1,0 +1,22 @@
+[
+  /* --- GENERAL BUNDLES ---
+    These bundles will always be included from the _Layout-file. Do not add new bundles in this
+    section, instead add to the already existing ones.
+  */
+  {
+    "outputFileName": "wwwroot/bundles/custom/css/300_layout_admin_voidpointer_styles.css",
+    "inputFiles": [
+      "wwwroot/custom/css/test.css"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/bundles/custom/js/300_admin_voidpointer_scripts.js",
+    "inputFiles": [
+      "wwwroot/custom/js/test.js"
+    ]
+  }
+
+  // Custom
+
+]
