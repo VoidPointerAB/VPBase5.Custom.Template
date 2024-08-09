@@ -17,7 +17,7 @@ xcopy /Y "%vpBasePath%\nuget.config" "..\nuget.config*"
 
 set "vpBaseToolsFolderPath=%vpBasePath%\src\tools"
 
-xcopy %vpBaseToolsFolderPath% tools /E /H /C /I
+xcopy %vpBaseToolsFolderPath% tools /E /H /C /I /Y
 
 echo.
 echo Deleting VPBase.Custom.Core bin and obj files
@@ -29,6 +29,7 @@ echo Deleting VPBase.Custom.Server bin and obj files
 
 rmdir /s /q custom\VPBase.Custom.Server\bin
 rmdir /s /q custom\VPBase.Custom.Server\obj
+rmdir /s /q custom\VPBase.Custom.Server\wwwroot\base
 
 echo Deleting VPBase.Custom.Test bin and obj files
 
