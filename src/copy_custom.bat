@@ -12,6 +12,7 @@ echo *******************************************************************
 echo.
 
 echo Please continue to start copying custom files from the specified VPBase5 Git Path
+echo.
 
 pause
 
@@ -59,7 +60,6 @@ rmdir /s /q custom\VPBase.Custom.Tests\bin
 rmdir /s /q custom\VPBase.Custom.Tests\obj
 
 echo - Third party vpbase files
-echo.
 
 rmdir /s /q custom\thirdparty\vpbase
 
@@ -71,6 +71,13 @@ del /q custom\reference_replacement\*_thirdparty.txt
 del /q custom\switch_references_to_base_using_project_reference_same_git.bat
 del /q custom\switch_references_to_base_using_thirdparty.bat
 
+echo.
+
+echo *******************************************************************
+echo Finished!
+echo Please jump to the custom folder and run "switch_references_to_base_using_nuget.bat"
+echo to switch to reference base as nuget since otherwise project files reference base as thirdparty dlls etc.
+echo *******************************************************************
 echo.
 
 pause
