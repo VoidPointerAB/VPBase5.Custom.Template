@@ -72,12 +72,13 @@ del /q custom\switch_references_to_base_using_project_reference_same_git.bat
 del /q custom\switch_references_to_base_using_thirdparty.bat
 
 echo.
-
-echo *******************************************************************
-echo Finished!
-echo Please jump to the custom folder and run "switch_references_to_base_using_nuget.bat"
-echo to switch to reference base as nuget since otherwise project files reference base as thirdparty dlls etc.
-echo *******************************************************************
+echo Switch to nuget reference
 echo.
 
-pause
+timeout 1
+
+cd custom
+call "switch_references_to_base_using_nuget.bat"
+
+echo.
+echo Finished
