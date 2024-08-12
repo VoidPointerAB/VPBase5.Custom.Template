@@ -1,0 +1,4 @@
+  <ItemGroup>
+    <PackageVersion Include="VPBase5.Base.Core" Version="2.0.15" />
+    <PackageVersion Include="VPBase5.Base.Web" Version="2.0.15" />
+  </ItemGroup>

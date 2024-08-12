@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	
     <PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
@@ -22,16 +22,10 @@
 		<ProjectReference Include="..\VPBase.Custom.Server\VPBase.Custom.Server.csproj" />
 	</ItemGroup>
 
+	<!-- VPBASE-REFERENCES START -->
 	<ItemGroup>
-		<Reference Include="VoidPointer.TestHelpers">
-		  <HintPath>..\thirdparty\VoidPointer.TestHelpers\VoidPointer.TestHelpers.dll</HintPath>
-		</Reference>
-		<Reference Include="VPBase.Shared.Core">
-		  <HintPath>..\thirdparty\vpbase\VPBase.Shared.Core.dll</HintPath>
-		</Reference>
-		<Reference Include="VPBase.Shared.Server">
-		  <HintPath>..\thirdparty\vpbase\VPBase.Shared.Server.dll</HintPath>
-		</Reference>
+		<PackageReference Include="VPBase5.Base.Core" />
 	</ItemGroup>
-
+	<!-- VPBASE-REFERENCES END -->
+	
 </Project>

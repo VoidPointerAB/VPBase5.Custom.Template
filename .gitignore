@@ -31,3 +31,5 @@ TestResults
 /src/custom/thirdparty/vpbase/*
 /src/custom/configs/*
 !/src/custom/configs/empty.json
+/src/tools/VBase.Text.Command/.vs
+/src/tools/VBase.Text.Command/VPBase.Text.Command/.vs

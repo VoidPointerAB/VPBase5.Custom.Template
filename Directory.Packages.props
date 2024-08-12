@@ -45,7 +45,11 @@
     <PackageVersion Include="NUnit" Version="4.1.0" />
     <PackageVersion Include="NUnit.ConsoleRunner" Version="3.18.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+  <!-- VPBASE-REFERENCES START -->
+  <ItemGroup>
     <PackageVersion Include="VPBase5.Base.Core" Version="2.0.15" />
     <PackageVersion Include="VPBase5.Base.Web" Version="2.0.15" />
   </ItemGroup>
+  <!-- VPBASE-REFERENCES END -->
 </Project>

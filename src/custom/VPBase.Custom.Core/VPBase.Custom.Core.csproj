@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
@@ -35,13 +35,12 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" />
-		<PackageReference Include="VPBase5.Base.Core" />
 	</ItemGroup>
 
+	<!-- VPBASE-REFERENCES START -->
 	<ItemGroup>
-		<Reference Include="VPBase.Shared.Core">
-			<HintPath>..\thirdparty\vpbase\VPBase.Shared.Core.dll</HintPath>
-		</Reference>
+		<PackageReference Include="VPBase5.Base.Core" />
 	</ItemGroup>
+	<!-- VPBASE-REFERENCES END -->
 
 </Project>
