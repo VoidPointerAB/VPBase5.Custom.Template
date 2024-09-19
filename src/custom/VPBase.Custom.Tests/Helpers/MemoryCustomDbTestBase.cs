@@ -15,6 +15,8 @@ using VPBase.Custom.Core.Configuration;
 using VPBase.Custom.Core.Data;
 using VPBase.Custom.Server.Configuration;
 using VPBase.Custom.Tests.Settings;
+using VPBase.Shared.Core.Fakes;
+using VPBase.Shared.Core.Helpers;
 using VPBase.Shared.Core.Helpers.DateTimeProvider;
 using VPBase.Shared.Core.Services;
 using VPBase.Shared.Server.Configuration;
@@ -40,6 +42,8 @@ namespace VPBase.Custom.Tests.Helpers
 
         public FakeCustomAppSettings CustomAppSettings { get; set; }
         public FakeAppSettings AppSettings { get; set; }
+
+        public SharedFakeFriendlyIdCounterService SharedFakeFriendlyIdCounterService { get; set; }
 
         [SetUp]
         public new void SetUp()
@@ -94,9 +98,19 @@ namespace VPBase.Custom.Tests.Helpers
             DateTimeProvider = dateTimeProvider;
             Services.AddSingleton<IDateTimeProvider>(x => dateTimeProvider);
 
+            AddSharedIdDependencies();
+
             ServiceProvider = Services.BuildServiceProvider();
 
             Logger = ServiceProvider.GetService<ILoggerFactory>().CreateLogger("TestLogger");
+        }
+
+        private void AddSharedIdDependencies()
+        {
+            Services.AddTransient<SharedIdHelper>();
+            SharedFakeFriendlyIdCounterService = new SharedFakeFriendlyIdCounterService();
+            SharedFakeFriendlyIdCounterService.Fake_Clear();
+            Services.AddTransient<IFriendlyIdCounterService, SharedFakeFriendlyIdCounterService>();
         }
 
         [TearDown]

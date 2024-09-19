@@ -6,9 +6,9 @@
 	    <Nullable>disable</Nullable>
 	    <AssemblyName>VPBase.Custom.Core</AssemblyName>
 	    <RootNamespace>VPBase.Custom.Core</RootNamespace>
-	    <AssemblyVersion>2.0.15.0</AssemblyVersion>
-	    <FileVersion>2.0.15.0</FileVersion>
-	    <Version>2.0.15</Version>
+	    <AssemblyVersion>2.0.17.0</AssemblyVersion>
+	    <FileVersion>2.0.17.0</FileVersion>
+	    <Version>2.0.17</Version>
 		<NoWarn>$(NoWarn);NU1507</NoWarn>
 	</PropertyGroup>
 

@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.Logging;
-using VPBase.Auth.Contract.ConfigEntities;
 using VPBase.Custom.Core.Data;
+using VPBase.Custom.Core.Definitions;
 using VPBase.Custom.Core.Models.VP_Template_SimpleMvc;
 using VPBase.Custom.Core.Services.VP_Template_SimpleMvcService;
 using VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_SimpleMvc;
+using VPBase.Shared.Core.Configuration;
+using VPBase.Shared.Core.Helpers;
 using VPBase.Shared.Core.Helpers.DateTimeProvider;
 using VPBase.Shared.Core.Helpers.Validation;
 using VPBase.Shared.Core.Models;
@@ -20,24 +18,29 @@ namespace VPBase.Custom.Server.Areas.Custom.WebAppServices
         private readonly ICustomStorage _storage;
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly VP_Template_SimpleMvcService _vp_Template_SimpleMvcService;
+        private readonly SharedIdHelper _idHelper;
 
         public VP_Template_SimpleMvcWebAppService(
             ICustomStorage storage,
             ILoggerFactory loggerFactory,
             IDateTimeProvider dateTimeProvider,
-            VP_Template_SimpleMvcService vp_Template_SimpleMvcService)
+            VP_Template_SimpleMvcService vp_Template_SimpleMvcService,
+            SharedIdHelper idHelper)
         {
             _storage = storage;
             _dateTimeProvider = dateTimeProvider;
             _logger = loggerFactory.CreateLogger(GetType().Name);
             _vp_Template_SimpleMvcService = vp_Template_SimpleMvcService;
+            _idHelper = idHelper;
         }
 
         public VP_Template_SimpleMvcAddOrEditViewModel GetAddModel(string tenantId)
         {
+            var uniqueId = _idHelper.GenerateUniqueMigrationSafeId<CustomIdDefinition.VP_Template_SimpleMvc>(tenantId: tenantId, moduleName: ConfigModuleConstants.Custom);
+
             return new VP_Template_SimpleMvcAddOrEditViewModel
             {
-                VP_Template_SimpleMvcId = ConfigIdHelper.GenerateUniqueId(),
+                VP_Template_SimpleMvcId = uniqueId,     
                 ModifiedUtcDate = _dateTimeProvider.Now()
             };
         }

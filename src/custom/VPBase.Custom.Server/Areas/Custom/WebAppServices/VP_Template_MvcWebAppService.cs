@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Transactions;
-using VPBase.Auth.Contract.ConfigEntities;
 using VPBase.Custom.Core.Data;
 using VPBase.Custom.Core.Definitions;
 using VPBase.Custom.Core.Models.VP_Template_Mvc;
 using VPBase.Custom.Core.Services.VP_Template_Mvc;
 using VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_Mvc;
+using VPBase.Shared.Core.Configuration;
+using VPBase.Shared.Core.Helpers;
 using VPBase.Shared.Core.Helpers.DateTimeProvider;
 using VPBase.Shared.Core.Helpers.Validation;
 using VPBase.Shared.Core.Models;
@@ -21,19 +22,22 @@ namespace VPBase.Custom.Server.Areas.Custom.WebAppServices
         private readonly ICustomFieldValueService _customFieldValueService;
         private readonly VP_Template_MvcService _vp_Template_MvcService;
         private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly SharedIdHelper _idHelper;
 
         public VP_Template_MvcWebAppService(
             ICustomStorage storage,
             ILogger<VP_Template_MvcWebAppService> logger,
             ICustomFieldValueService customFieldValueService,
             VP_Template_MvcService vp_Template_MvcService,
-            IDateTimeProvider dateTimeProvider)
+            IDateTimeProvider dateTimeProvider, 
+            SharedIdHelper idHelper)
         {
             _storage = storage;
             _logger = logger;
             _customFieldValueService = customFieldValueService;
             _vp_Template_MvcService = vp_Template_MvcService;
             _dateTimeProvider = dateTimeProvider;
+            _idHelper = idHelper;
         }
 
         public async Task<VP_Template_MvcAddOrEditViewModel> GetAddModelAsync(string tenantId, CancellationToken cancellationToken = default)
@@ -42,7 +46,7 @@ namespace VPBase.Custom.Server.Areas.Custom.WebAppServices
 
             do
             {
-                uniqueId = ConfigIdHelper.GenerateUniqueId();
+                uniqueId = _idHelper.GenerateUniqueMigrationSafeId<CustomIdDefinition.VP_Template_Mvc>(tenantId: tenantId, moduleName: ConfigModuleConstants.Custom); 
             } while (await _storage.VP_Template_Mvcs.AnyAsync(x => x.VP_Template_MvcId == uniqueId, cancellationToken));
 
             return new VP_Template_MvcAddOrEditViewModel
@@ -142,7 +146,6 @@ namespace VPBase.Custom.Server.Areas.Custom.WebAppServices
 
             var list = await query.ToListAsync(cancellationToken);
 
-
             #region Supports customfields in list
 
             var customFieldValues = await _customFieldValueService.GetCustomFieldsWithStringValuesAsync(
@@ -170,9 +173,12 @@ namespace VPBase.Custom.Server.Areas.Custom.WebAppServices
         {
             var response = new ServerResponse();
 
+            var tenantIdShort = SharedTenantMigrationHelper.CreateTenantIdShort(tenantId);
+
             data.CustomFieldWithValues.ForEach(x =>
             {
-                x.CustomFieldValueId = Guid.NewGuid().ToString();
+                var uniqueId = _idHelper.GenerateUniqueMigrationSafeId<BaseIdDefinition.CustomFieldValue>(tenantId: tenantId, moduleName: ConfigModuleConstants.Base);   // CustomFieldValue should belong to base!
+                x.CustomFieldValueId = uniqueId;
             });
 
             try

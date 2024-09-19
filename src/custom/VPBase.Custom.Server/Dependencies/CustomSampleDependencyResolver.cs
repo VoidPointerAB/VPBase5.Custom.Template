@@ -7,10 +7,9 @@
 ║ Insert your custom project´s dependencies into that copy.
 ║ Update CustomStartupInstruction.cs so that it refers to your copy instead of this sample.
 ╚═══════════════════════════════════════════════════════════════════════════════════════════*/
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using VPBase.Base.Core.Data.CustomConfigImportExporter;
 using VPBase.Custom.Core.CustomConfigImportExporter;
+using VPBase.Custom.Core.Services.TenantMigrationServices;
 using VPBase.Custom.Core.Services.VP_Template_Mvc;
 using VPBase.Custom.Core.Services.VP_Template_SimpleMvcService;
 using VPBase.Custom.Server.Areas.Custom.WebAppServices;
@@ -21,7 +20,6 @@ using VPBase.Shared.Core.Services;
 using VPBase.Shared.Server.Code.Exporting;
 using VPBase.Shared.Server.Configuration;
 using VPBase.Shared.Server.Dependencies;
-using VPBase.Shared.Server.Helpers;
 using VPBase.Shared.Server.Services;
 
 namespace VPBase.Custom.Server.Dependencies
@@ -81,6 +79,8 @@ namespace VPBase.Custom.Server.Dependencies
             services.AddTransient<IImpersonateFilter, ImpersonateCustomSampleFilter>();
 
             services.AddTransient<ICustomConfigImportExporter, CustomTestConfigImportExporter>();
+
+            services.AddTransient<ITenantMigrationService, CustomSampleTenantMigrationService>();           
         }
 
         public DependencyType GetDependencyType()
