@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VPBase.Custom.Core.Data;
+using VPBase.Custom.Core.Data.Entities;
 using VPBase.Custom.Core.Definitions;
 using VPBase.Custom.Core.Models.VP_Template_SimpleMvc;
 using VPBase.Custom.Core.Services.VP_Template_SimpleMvcService;
@@ -34,13 +36,35 @@ namespace VPBase.Custom.Server.Areas.Custom.WebAppServices
             _idHelper = idHelper;
         }
 
+        //TODO: Maybe introduce a class that contains all filter properties?
+        public VP_Template_SimpleMvcListViewModel GetListModel(string titleFilter, string statusFilter, bool isActiveFilter, DateTime? startDateFilter, DateTime? endDateFilter)
+        {
+            var statusSelect = new List<SelectListItem>
+            {
+                new SelectListItem {Value = "all", Text = "All"},
+                new SelectListItem {Value = "0", Text = "New"},
+                new SelectListItem {Value = "1", Text = "In Progress"},
+                new SelectListItem {Value = "2", Text = "Done"}
+            };
+
+            return new VP_Template_SimpleMvcListViewModel
+            {
+                TitleFilter = titleFilter,
+                IsActiveFilter = isActiveFilter,
+                StatusFilter = statusFilter,
+                StartDateFilter = startDateFilter,
+                EndDateFilter = endDateFilter,
+                StatusSelect = statusSelect
+            };
+        }
+
         public VP_Template_SimpleMvcAddOrEditViewModel GetAddModel(string tenantId)
         {
             var uniqueId = _idHelper.GenerateUniqueMigrationSafeId<CustomIdDefinition.VP_Template_SimpleMvc>(tenantId: tenantId, moduleName: ConfigModuleConstants.Custom);
 
             return new VP_Template_SimpleMvcAddOrEditViewModel
             {
-                VP_Template_SimpleMvcId = uniqueId,     
+                VP_Template_SimpleMvcId = uniqueId,
                 ModifiedUtcDate = _dateTimeProvider.Now()
             };
         }
@@ -66,17 +90,50 @@ namespace VPBase.Custom.Server.Areas.Custom.WebAppServices
             };
         }
 
-        public ServerResponse<List<VP_Template_SimpleMvcGetModel>> GetList(int skip, int take, SortType sort, string tenantId)
+        public ServerResponse<List<VP_Template_SimpleMvcGetModel>> GetList(string titleFilter, string status, bool isActive, DateTime? startDate, DateTime? endDate, int skip, int take, SortType sort, string tenantId)
         {
+            var parsedStatus = VP_Template_SimpleMvcStatus.New;
+            var allStatus = string.IsNullOrEmpty(status) || status.Equals("all");
+
             var query = _storage.VP_Template_SimpleMvcs.Where(x => x.DeletedUtc == null && x.TenantId == tenantId)
                 .Select(x => new VP_Template_SimpleMvcGetModel
                 {
                     VP_Template_SimpleMvcId = x.VP_Template_SimpleMvcId,
                     Title = x.Title,
                     Description = x.Description,
+                    Status = x.Status,
+                    IsActive = x.IsActive,
                     CreatedUtc = x.CreatedUtc,
                     ModifiedUtc = x.ModifiedUtc,
                 });
+
+            if (!string.IsNullOrEmpty(titleFilter))
+            {
+                query = query.Where(x => x.Title.Contains(titleFilter));
+            }
+
+            query = query.Where(x => x.IsActive == isActive);
+
+            if (!allStatus)
+            {
+                var statusIsParsed = Enum.TryParse(status, out parsedStatus);
+
+                if (statusIsParsed)
+                {
+                    query = query.Where(x => x.Status == parsedStatus);
+                }
+            }
+
+            if (startDate.HasValue)
+            {
+                query = query.Where(x => x.CreatedUtc >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                var queryEndDate = endDate.Value.AddDays(1);
+                query = query.Where(x => x.CreatedUtc < queryEndDate);
+            }
 
             if (sort != SortType.None)
             {

@@ -31,7 +31,7 @@ namespace VPBase.Custom.Server.Configuration.MenuLayers
                 "fa-star").Policy(CustomCoreAppConfigDefinition.PolicyName_VP_Template_Mvc);
 
             rootNode.AddLink("Custom S.Mvc Template",
-                urlHelper.Action("List", "VP_Template_SimpleMvc", new { Area = "Custom" }),
+                urlHelper.Action("List", "VP_Template_SimpleMvc", new { Area = "Custom", isActive = true }),
                 null,
                 "fa-star").Policy(CustomCoreAppConfigDefinition.PolicyName_VP_Template_SimpleMvc);
         }

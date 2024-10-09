@@ -1,7 +1,6 @@
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VPBase.Auth.Contract.Definitions;
+using VPBase.Base.Server.Helpers;
 using VPBase.Custom.Core.Definitions;
 using VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_SimpleMvc;
 using VPBase.Custom.Server.Areas.Custom.WebAppServices;
@@ -24,15 +23,17 @@ namespace VPBase.Custom.Server.Areas.Custom.Controllers
             _appSettings = appSettings;
         }
 
-        public ActionResult List()
+        public ActionResult List(string title, string status, bool isActive, DateTime? startDate, DateTime? endDate)
         {
-            return View();
+            return View(_vp_Template_SimpleMvcWebAppService.GetListModel(title, status, isActive, startDate, endDate));
         }
 
         public ActionResult Add()
         {
             var activeTenantId = HttpContext.GetActiveTenantIdCookie();
             var model = _vp_Template_SimpleMvcWebAppService.GetAddModel(activeTenantId);
+
+            model.ReturnUrl = ReturnUrlHelper.GetUrl(null, "/Custom/VP_Template_SimpleMvc/List", Request);
 
             return View(model);
         }
@@ -47,13 +48,15 @@ namespace VPBase.Custom.Server.Areas.Custom.Controllers
                 return LocalRedirect(ViewAdminHelper.BasePageError404Path);
             }
 
+            model.ReturnUrl = ReturnUrlHelper.GetUrl(null, "/Custom/VP_Template_SimpleMvc/List", Request);
+
             return View("Edit", model);
         }
 
-        public ActionResult GetVP_Template_SimpleMvcListItems()
+        public ActionResult GetVP_Template_SimpleMvcListItems(string title, string status, bool isActive, DateTime? startDate, DateTime? endDate)
         {
             var activeTenantId = HttpContext.GetActiveTenantIdCookie();
-            var items = _vp_Template_SimpleMvcWebAppService.GetList(0, 0, SortType.None, activeTenantId);
+            var items = _vp_Template_SimpleMvcWebAppService.GetList(title, status, isActive, startDate, endDate, 0, 0, SortType.None, activeTenantId);
 
             return Json(items);
         }
@@ -68,7 +71,7 @@ namespace VPBase.Custom.Server.Areas.Custom.Controllers
 
                 if (!serverResponse.Errors.Any())
                 {
-                    return RedirectToAction("List");
+                    return Redirect(model.ReturnUrl);
                 }
 
                 model.Errors = serverResponse.Errors;
@@ -87,7 +90,7 @@ namespace VPBase.Custom.Server.Areas.Custom.Controllers
 
                 if (!serverResponse.Errors.Any())
                 {
-                    return RedirectToAction("List");
+                    return Redirect(model.ReturnUrl);
                 }
 
                 model.Errors = serverResponse.Errors;

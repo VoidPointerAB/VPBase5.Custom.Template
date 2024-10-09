@@ -35,6 +35,7 @@ namespace VPBase.Custom.Core.Services.VP_Template_SimpleMvcService
                 VP_Template_SimpleMvcId = model.VP_Template_SimpleMvcId,
                 Title = model.Title,
                 Description = model.Description,
+                Status = model.Status,
                 CreatedUtc = _dateTimeProvider.Now(),
                 ModifiedUtc = _dateTimeProvider.Now()
             };
@@ -60,6 +61,7 @@ namespace VPBase.Custom.Core.Services.VP_Template_SimpleMvcService
             dbModel.Title = model.Title;
 
             dbModel.Description = model.Description;
+            dbModel.Status = model.Status;
             dbModel.ModifiedUtc = _dateTimeProvider.Now();
 
             _storage.SaveChanges();

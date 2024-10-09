@@ -16,5 +16,14 @@ namespace VPBase.Custom.Core.Data.Entities
 
         public string Title { get; set; }
         public string Description { get; set; }
+        public VP_Template_SimpleMvcStatus Status { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public enum VP_Template_SimpleMvcStatus
+    {
+        New,
+        InProgress,
+        Done
     }
 }

@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using VPBase.Custom.Core.Data.Entities;
-using VPBase.Custom.Core.Models.VP_Template_SimpleMvc;
 using VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_SimpleMvc;
 using VPBase.Custom.Server.Areas.Custom.WebAppServices;
 using VPBase.Custom.Tests.Helpers;
@@ -30,7 +27,7 @@ namespace VPBase.Custom.Tests.AppServices
 
             var notDeletedCount = Storage.VP_Template_SimpleMvcs.Count(x => x.TenantId == TenantTestId && x.DeletedUtc == null);
 
-            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(0, 100, SortType.CreatedUtc_Asc, TenantTestId);
+            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(null, null, true, null, null, 0, 100, SortType.CreatedUtc_Asc, TenantTestId);
 
             Assert.That(returnModel.Data, Is.Not.Null);
             Assert.That(returnModel.Data.Count(), Is.EqualTo(notDeletedCount));
@@ -47,7 +44,7 @@ namespace VPBase.Custom.Tests.AppServices
 
             var dbList = Storage.VP_Template_SimpleMvcs.Where(x => x.TenantId == tenantId && x.DeletedUtc == null);
 
-            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(0, 100, SortType.CreatedUtc_Asc, tenantId);
+            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(null, null, true, null, null, 0, 100, SortType.CreatedUtc_Asc, tenantId);
 
             foreach (var dbItem in dbList)
             {
@@ -67,7 +64,7 @@ namespace VPBase.Custom.Tests.AppServices
 
             Console.WriteLine($"Executing row: {testRow}");
 
-            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(skip, take, SortType.CreatedUtc_Asc, TenantTestId);
+            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(null, null, true, null, null, skip, take, SortType.CreatedUtc_Asc, TenantTestId);
 
             Assert.That(returnModel.Data.Count(), Is.EqualTo(take));
         }
@@ -81,7 +78,7 @@ namespace VPBase.Custom.Tests.AppServices
 
             Console.WriteLine($"Executing row: {testRow}");
 
-            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(0, 100, sort, TenantTestId);
+            var returnModel = _vpTemplateMvcWebVpTemplateMvcWebAppService.GetList(null, null, true, null, null, 0, 100, sort, TenantTestId);
 
             Assert.That(returnModel.Data.First().VP_Template_SimpleMvcId, Is.EqualTo(expectedId));
         }
@@ -185,6 +182,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_1",
                 Title = "Test 1",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-1),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-1)
             });
@@ -192,6 +190,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_2",
                 Title = "Test 2",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-2),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-2)
             });
@@ -199,6 +198,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_3",
                 Title = "Test 3",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-3),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-3)
             });
@@ -206,6 +206,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_4",
                 Title = "Test 4",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-4),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-4)
             });
@@ -213,6 +214,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_5",
                 Title = "Test 5",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-5),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-5),
                 DeletedUtc = DateTimeProvider.Now()
@@ -221,6 +223,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_6",
                 Title = "Test 6",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-6),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-6),
                 DeletedUtc = DateTimeProvider.Now()
@@ -229,6 +232,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_7",
                 Title = "Test 7",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-7),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-7),
                 DeletedUtc = DateTimeProvider.Now()
@@ -237,6 +241,7 @@ namespace VPBase.Custom.Tests.AppServices
             {
                 VP_Template_SimpleMvcId = "Custom_VP_Template_SimpleMvc_8",
                 Title = "Test 8",
+                IsActive = true,
                 CreatedUtc = DateTimeProvider.Now().AddDays(-8),
                 ModifiedUtc = DateTimeProvider.Now().AddDays(-8)
             });

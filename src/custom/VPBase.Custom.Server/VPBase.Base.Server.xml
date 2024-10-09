@@ -266,6 +266,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:VPBase.Base.Server.Helpers.ReturnUrlHelper.GetUrl(System.String,System.String,Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            This method returns an URL that is based primarily on the "referer" from the provided HttpRequest, if no other is provided.
+            </summary>
+            <param name="returnUrl">ReturnUrl that is coming from another source. This will have priority over everything else</param>
+            <param name="fallbackUrl">FallBackUrl that is used if ReturnUrl and "referer" is not found</param>
+            <param name="request">HttpRequest that is used to fetch the "referer"</param>
+        </member>
         <member name="T:VPBase.Base.Server.Resources.Areas.Admin.Views.Shared.PartialResources_sv">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.

@@ -4,6 +4,7 @@
 
 <div class="col-sm-12 col-lg-8">
     @Html.HiddenFor(x => x.ModifiedUtcDate)
+    @Html.HiddenFor(x => x.ReturnUrl)
 
     @if (Model.Errors.Any())
     {
@@ -44,7 +45,7 @@
                     Save
                 </button>
 
-                <a href="@Url.Action("List", "VP_Template_SimpleMvc")" class="btn btn-default">Back</a>
+                <a href="@Model.ReturnUrl" class="btn btn-default">Back</a>
             </div>
         </div>
     </div>

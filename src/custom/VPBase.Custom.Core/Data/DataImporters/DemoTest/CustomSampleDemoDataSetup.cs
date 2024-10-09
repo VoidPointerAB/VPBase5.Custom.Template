@@ -10,6 +10,7 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using VPBase.Custom.Core.Data.DataPalettes;
+using VPBase.Custom.Core.Data.Entities;
 using VPBase.Shared.Core.Configuration;
 using VPBase.Shared.Core.Data.Demo;
 using VPBase.Shared.Core.Helpers.DateTimeProvider;
@@ -67,17 +68,18 @@ namespace VPBase.Custom.Core.Data.DataImporters.DemoTest
             var customStorage = serviceProvider.GetService<ICustomStorage>();
             var dateTimeProvider = serviceProvider.GetService<IDateTimeProvider>();
 
-            CustomSampleDataPalette.ReferenceDate = dateTimeProvider.Now();
+            var now = dateTimeProvider.Now();
+            CustomSampleDataPalette.ReferenceDate = now;
 
             if (!customStorage.VP_Template_SimpleMvcs.Any(x => x.TenantId == tenantId))
             {
-                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Stekel", description: "En salt insekt"));
-                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Bönsyrsa", description: "En annan salt insekt"));
-                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Mops", description: "En hund"));
-                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Sphynx", description: "En katt"));
-                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Räka", description: "Ett litet skaldjur"));
-                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Elefant", description: "Ett stort djur"));
-                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Tarantel", description: "Ett räligt djur"));
+                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Stekel", description: "En salt insekt", status: VP_Template_SimpleMvcStatus.New, createdUtc: now));
+                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Bönsyrsa", description: "En annan salt insekt", status: VP_Template_SimpleMvcStatus.New, createdUtc: now));
+                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Mops", description: "En hund", status: VP_Template_SimpleMvcStatus.InProgress, createdUtc: now.AddDays(-1)));
+                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Sphynx", description: "En katt", status: VP_Template_SimpleMvcStatus.InProgress, createdUtc: now.AddDays(2)));
+                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Räka", description: "Ett litet skaldjur", status: VP_Template_SimpleMvcStatus.Done, createdUtc: now.AddDays(-5)));
+                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Elefant", description: "Ett stort djur", status: VP_Template_SimpleMvcStatus.Done, createdUtc: now.AddDays(6)));
+                customStorage.Add(CustomSampleDataPalette.Entities.VP_Template_SimpleMvc(tenantId: tenantId, name: "Tarantel", description: "Ett räligt djur", status: VP_Template_SimpleMvcStatus.Done, createdUtc: now, isActive: false));
 
                 customStorage.SaveChanges();
             }

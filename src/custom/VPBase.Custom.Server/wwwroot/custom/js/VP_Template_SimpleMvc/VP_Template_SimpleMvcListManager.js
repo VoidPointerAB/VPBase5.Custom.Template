@@ -6,6 +6,15 @@ var VP_Template_SimpleMvcListManager = function () {
             buttons: DataTableHelper.GetDefaultButtons("Simple_VP_Template_MVC"),
             columns: [
                 { title: 'Title', data: 'title' },
+                { title: 'Status', data: 'status' },
+                {
+                    title: 'Is Active',
+                    data: 'isActive',
+                    render: function(data, type, row, meta) {
+                        return data ? "Yes" : "No";
+                    }
+                },
+                { title: 'Created Date', data: 'createdUtcString', type: 'date' },
                 {
                     width: '120px',
                     data: null,
@@ -18,7 +27,7 @@ var VP_Template_SimpleMvcListManager = function () {
                             '<button data-id="' + row.vP_Template_SimpleMvcId + '" data-name="' + row.title + '" class="btn btn-xs btn-danger delete-btn">' +
                                 '<i class="fa fa-trash"></i> Delete' +
                             '</button>' +
-                            '<a href="/Custom/VP_Template_SimpleMvc/Edit/' + row.vP_Template_SimpleMvcId + '" class="btn btn-primary btn-xs" >' +
+                            '<a href="/Custom/VP_Template_SimpleMvc/Edit/' + row.vP_Template_SimpleMvcId + '" class="btn btn-primary btn-xs edit-btn" >' +
                                 '<i class="fa fa-pencil-square-o"></i> Edit' +
                             '</a>';
 
@@ -42,6 +51,7 @@ var VP_Template_SimpleMvcListManager = function () {
             initComplete: function () {
                 FilterHelper.ApplyDataTableFilter(_dataTable);
             },
+            order: [3, 'desc']
         }));
 
         $('#load-button').click(function () {
@@ -49,6 +59,11 @@ var VP_Template_SimpleMvcListManager = function () {
             _dataTable.ajax.reload();
         });
 
+        $('#add-btn').click(function () {
+            FilterHelper.SaveFilter();
+        });
+
+        $('.data-table-container table').on('click', '.edit-btn', function () { FilterHelper.SaveFilter(); });
         $('.data-table-container table').on('click', '.delete-btn', deleteItem);
     }
 

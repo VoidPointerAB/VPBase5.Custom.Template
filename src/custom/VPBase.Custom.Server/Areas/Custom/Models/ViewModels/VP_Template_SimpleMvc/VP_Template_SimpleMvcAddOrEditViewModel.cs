@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using VPBase.Auth.Contract.Models;
 
 namespace VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_SimpleMvc
 {
@@ -21,5 +22,6 @@ namespace VPBase.Custom.Server.Areas.Custom.Models.ViewModels.VP_Template_Simple
         public DateTime ModifiedUtcDate { get; set; }
 
         public ICollection<string> Errors { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }
